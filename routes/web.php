@@ -15,8 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    User::create(['name' => 'admin', 'last_name' => 'g', 'email' => 'admin@gmail.com', 'password' => Hash::make('12456789')]);
-    return 'asd';
-    return view('welcome');
-});
+
+foreach (config('tenancy.central_domains') as $domain) {
+    Route::domain($domain)->group(function () {
+        // your actual routes
+        Route::get('/', function () {
+            return 'centrel domain';
+
+            $tenant1 = App\Models\Tenant::create(['id' => 'foo']);
+            $tenant1->domains()->create(['domain' => '127.0.0.1:8000']);
+
+            $tenant2 = App\Models\Tenant::create(['id' => 'bar']);
+            $tenant2->domains()->create(['domain' => '127.0.0.1:1000']);
+            return 'tenant created';
+        });
+    });
+}
