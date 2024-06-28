@@ -40,3 +40,6 @@ users
 configure database credentials in .env
 git checkout new_structure
 php artisan migrate --seed
+
+**suggestions**
+Add tenant_id also in all table so if if we need data against a tenant not only one user we can access easily
