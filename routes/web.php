@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    User::create(['name' => 'admin', 'last_name' => 'g', 'email' => 'admin@gmail.com', 'password' => Hash::make('12456789')]);
+    return 'asd';
     return view('welcome');
 });
