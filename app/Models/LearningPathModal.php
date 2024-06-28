@@ -23,6 +23,11 @@ class LearningPathModal extends Model
     }
 
 
+    function tenantUsers()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     function users()
     {
         return $this->belongsToMany(User::class, 'learning_path_users', 'path_id', 'user_id');

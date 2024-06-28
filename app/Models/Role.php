@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-
-class Chapter extends Model
+class Role extends Model
 {
     use HasFactory;
+
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -23,8 +23,9 @@ class Chapter extends Model
         });
     }
 
-    function user()
+
+    function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }

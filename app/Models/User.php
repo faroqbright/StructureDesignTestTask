@@ -62,6 +62,19 @@ class User extends Authenticatable
         return $this->hasOne(MyStoryTraining::class);
     }
 
+    function learningPathModals()
+    {
+        return $this->hasMany(LearningPathModal::class);
+    }
+    function productions()
+    {
+        return $this->hasMany(Production::class);
+    }
+    function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
+
     function learningPaths()
     {
         return $this->belongsToMany(LearningPathModal::class, 'learning_path_users', 'user_id', 'path_id');
@@ -70,5 +83,37 @@ class User extends Authenticatable
     function rentedProduction()
     {
         return $this->hasOne(RentedProduction::class);
+    }
+
+    function asyncSessions()
+    {
+        return $this->hasMany(AsyncSession::class);
+    }
+
+
+    function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+    function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+
+
+    //scopes
+    public function scopeByCompany($query, $companyId)
+    {
+        return $query->where('company_id', $companyId);
+    }
+
+    public function scopeByTenant($query, $tenantId)
+    {
+        return $query->where('tenant_id', $tenantId);
     }
 }
